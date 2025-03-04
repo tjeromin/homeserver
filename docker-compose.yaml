@@ -44,4 +44,10 @@ services:
     depends_on:
       - nextcloud-php
 
-
+  iobroker:
+    container_name: iobroker
+    image: buanet/iobroker:latest-v9
+    hostname: iobroker
+    restart: always
+    ports:
+      - "8081:8081"
