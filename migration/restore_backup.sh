@@ -9,7 +9,9 @@ if [[ "$answer" != "Y" && "$answer" != "y" ]]; then
     exit
 fi
 
-printf " --- restore config folder ---\n"
+printf "\n--- NEXTCLOUD ---\n"
+
+printf "\n--- restore config folder ---\n"
 rsync -Aavx --info=progress2 --info=name0 $1/config /var/www/html/config
 
 printf "\n\n --- restore themes folder ---\n"
@@ -21,5 +23,10 @@ mysql -h localhost -u oc_ncadmin -p"$password" -e "DROP DATABASE nextcloud"
 mysql -h localhost -u oc_ncadmin -p"$password" -e "CREATE DATABASE nextcloud"
 printf "\nrestoring database dump...\n"
 mysql -h localhost -u oc_ncadmin -p"$password" nextcloud < nextcloud-sqlbkp.bak
+
+printf "\n--- IOBROKER ---\n"
+
+printf "\n--- restore config folder ---\n"
+rsync -Aavx --info=progress2 --info=name0 $1/iobroker /opt/iobroker
 
 printf "\nfinished\n"
