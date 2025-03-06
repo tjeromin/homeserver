@@ -69,4 +69,13 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=Avenge-Daycare0-Jury
       - DOCKER_INFLUXDB_INIT_ORG=tino
       - DOCKER_INFLUXDB_INIT_BUCKET=smarthome
-  
+
+  grafana:
+    image: grafana/grafana:11.5.2
+    container_name: grafana
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./grafana:/var/lib/grafana
+    user: "$UID:$GID"
