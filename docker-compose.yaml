@@ -1,6 +1,4 @@
-volumes:
-  nextcloud:
-  db:
+
 
 services:
   db:
@@ -8,7 +6,7 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - db:/var/lib/mysql
+      - ./maridadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=pararas
       - MYSQL_PASSWORD=pararas
@@ -21,7 +19,7 @@ services:
     links:
       - db
     volumes:
-      - nextcloud:/var/www/html
+      - ./nextcloud:/var/www/html
     environment:
       - MYSQL_PASSWORD=pararas
       - MYSQL_DATABASE=nextcloud
@@ -38,7 +36,7 @@ services:
     volumes:
       - ./apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - nextcloud:/var/www/html
+      - ./nextcloud:/var/www/html
     volumes_from:
       - nextcloud-php
     depends_on:
@@ -78,4 +76,3 @@ services:
       - '3000:3000'
     volumes:
       - ./grafana:/var/lib/grafana
-    user: "$UID:$GID"
