@@ -2,24 +2,42 @@
 
 # $1 path to backup folder
 
-printf 'This script will delete and restore the database nextcloud. Is the mariadb docker container running (y/n)? '
+printf 'This script will delete and restore the database nextcloud. Is the mariadb docker container running (yes/n)? '
 read -r answer
 
-if [[ "$answer" != "Y" && "$answer" != "y" ]]; then
+if [ "$answer" != "yes" ]; then
     exit
 fi
 
-printf '\nIs nextcloud not yet installed or in maintenance mode? (y/n)? '
+printf '\nIs nextcloud not yet installed or in maintenance mode? (yes/n)? '
 read -r answer
 
-if [[ "$answer" != "Y" && "$answer" != "y" ]]; then
+if [ "$answer" != "yes" ]; then
     exit
 fi
 
 printf "\n\n --- restore database ---\n"
-read -s -p -r "Enter password:" password
-docker exec mariadb sh -c 'mariadb -u root -p'"$password"' -e "DROP DATABASE nextcloud"'
-docker exec mariadb sh -c 'mariadb -u root -p'"$password"' -e "CREATE DATABASE nextcloud"'
+read -rsp "Enter password:" password
+printf "\n"
+if docker exec mariadb sh -c 'mariadb -u root -p'"$password"' -e "DROP DATABASE nextcloud"'; then
+    printf "success\n"
+else
+    printf "failed\n"
+    exit 1
+fi
+if docker exec mariadb sh -c 'mariadb -u root -p'"$password"' -e "CREATE DATABASE nextcloud"'; then
+    printf "success\n"
+else
+    printf "failed\n"
+    exit 1
+fi
 
 printf "\nrestoring database dump...\n"
-docker exec mariadb sh -c 'mariadb -u root -p"pararas" --database nextcloud < /var/lib/mysql/nextcloud-sqlbkp.sql'
+if docker exec mariadb sh -c 'mariadb -u root -p"pararas" --database nextcloud < /var/lib/mysql/nextcloud-sqlbkp.sql'; then
+    printf "success\n"
+else
+    printf "failed\n"
+    exit 1
+fi
+
+printf "\nfinished! Turn off nextcloud maintenance mode\n"
