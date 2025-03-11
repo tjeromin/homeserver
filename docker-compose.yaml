@@ -1,8 +1,9 @@
 
 
 services:
-  db:
+  mariadb:
     image: mariadb:lts
+    container_name: mariadb
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
@@ -15,19 +16,21 @@ services:
 
   nextcloud-php:
     image: nextcloud:stable-fpm
+    container_name: nextcloud
     restart: always
     links:
-      - db
+      - mariadb
     volumes:
       - ./nextcloud:/var/www/html
     environment:
       - MYSQL_PASSWORD=pararas
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
+      - MYSQL_HOST=mariadb
 
   apache:
     image: httpd:2.4-alpine
+    container_name: apache
     restart: always
     ports:
       - 8080:80
@@ -43,8 +46,8 @@ services:
       - nextcloud-php
 
   iobroker:
-    container_name: iobroker
     image: buanet/iobroker:latest-v9
+    container_name: iobroker
     hostname: iobroker
     restart: always
     ports:
@@ -53,8 +56,8 @@ services:
       - ./iobroker:/opt/iobroker
 
   influxdb:
-    container_name: influxdb
     image: influxdb:2
+    container_name: influxdb
     restart: always
     ports:
       - "8086:8086"
