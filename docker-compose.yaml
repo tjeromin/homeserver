@@ -27,6 +27,15 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=mariadb
+      - REDIS_HOST=redis
+    depends_on:
+      - mariadb
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
 
   apache:
     image: httpd:2.4-alpine
@@ -79,3 +88,5 @@ services:
       - '3000:3000'
     volumes:
       - ./grafana:/var/lib/grafana
+    depends_on:
+      - influxdb
