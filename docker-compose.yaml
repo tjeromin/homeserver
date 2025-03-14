@@ -43,6 +43,7 @@ services:
     restart: always
     ports:
       - 8080:80
+      - 9090:90
     links:
       - nextcloud-php
     volumes:
@@ -69,7 +70,7 @@ services:
     container_name: influxdb
     restart: always
     ports:
-      - "8086:8086"
+      - 8086:8086
     volumes:
       - ./influxdb/data:/var/lib/influxdb2
       - ./influxdb/config:/etc/influxdb2
@@ -85,7 +86,7 @@ services:
     container_name: grafana
     restart: always
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes:
       - ./grafana:/var/lib/grafana
     depends_on:
