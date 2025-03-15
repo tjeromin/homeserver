@@ -59,7 +59,7 @@ services:
     
   certbot-tinocloud:
     image: certbot/certbot
-    container_name: certbot
+    container_name: certbot-tinocloud
     restart: always
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
@@ -68,7 +68,7 @@ services:
 
   certbot-grafana:
     image: certbot/certbot
-    container_name: certbot
+    container_name: certbot-grafana
     restart: always
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
