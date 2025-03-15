@@ -49,11 +49,31 @@ services:
     volumes:
       - ./apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
       - ./nextcloud:/var/www/html
     volumes_from:
       - nextcloud-php
     depends_on:
       - nextcloud-php
+    
+  certbot-tinocloud:
+    image: certbot/certbot
+    container_name: certbot
+    restart: always
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d tinocloud.de --agree-tos --non-interactive
+
+  certbot-grafana:
+    image: certbot/certbot
+    container_name: certbot
+    restart: always
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d grafana.tinocloud.de --agree-tos --non-interactive
 
   iobroker:
     image: buanet/iobroker:latest-v9
