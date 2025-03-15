@@ -32,6 +32,13 @@ else
 fi
 
 echo "################"
+echo "make files executable"
+chmod +x ../disk_scripts/measure_influxdb_size.sh
+chmod +x ../migration/create_backup.sh
+chmod +x ../migration/restore_backup.sh
+chmod +x ../migration/restore_mariadb.sh
+
+echo "################"
 
 echo "Expecting docker and docker-compose to be installed"
 echo "check paths in crontab for root"

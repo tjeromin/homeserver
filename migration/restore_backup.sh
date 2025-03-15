@@ -5,7 +5,7 @@
 printf 'This script will delete and write the config, themes and data folder in /var/www/html/ (y/n)? '
 read -r answer
 
-if [[ "$answer" != "Y" && "$answer" != "y" ]]; then
+if [ "$answer" != "yes" ]; then
     exit
 fi
 
