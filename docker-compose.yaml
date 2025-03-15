@@ -23,11 +23,16 @@ services:
     volumes:
       - ./nextcloud:/var/www/html
     environment:
+      - NEXTCLOUD_ADMIN_USER=ncadmin
+      - NEXTCLOUD_ADMIN_PASSWORD=pmabSG3YUTYqCGaFBA6B
+      - NEXTCLOUD_TRUSTED_DOMAINS=192.168.178.55 tinocloud.de
       - MYSQL_PASSWORD=pararas
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=mariadb
       - REDIS_HOST=redis
+      - PHP_MEMORY_LIMIT=1024M
+      - PHP_UPLOAD_LIMIT=1024M
     depends_on:
       - mariadb
       - redis

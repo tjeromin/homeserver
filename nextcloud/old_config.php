@@ -1,0 +1,36 @@
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocf7un6w7z5t',
+  'passwordsalt' => 'zkzgbrxDmIdWqdUXA7bGbEojNd7N9g',
+  'secret' => 'Dl03yNqtyJhUaPsHkmy76gehgv4O9yKm1yB2K6BVBkcJDeSz',
+  'trusted_domains' =>
+  array (
+    0 => 'ubuntu',
+    1 => 'tinocloud.de',
+    2 => '192.168.178.89',
+  ),
+  'datadirectory' => '/mnt/drive1/nc_data',
+  'dbtype' => 'mysql',
+  'version' => '30.0.7.2',
+  'overwrite.cli.url' => 'http://ubuntu',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'localhost:3306',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'oc_ncadmin',
+  'dbpassword' => '0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk',
+  'installed' => true,
+  'memcache.local' => '\\OC\\Memcache\\Redis',
+  'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'filelocking.enabled' => 'true',
+  'redis' =>
+  array (
+    'host' => '127.0.0.1',
+    'port' => 6379,
+  ),
+  'default_phone_region' => 'GB',
+  'mail_smtpmode' => 'smtp',
+  'mail_sendmailmode' => 'smtp',
+  'maintenance' => false,
