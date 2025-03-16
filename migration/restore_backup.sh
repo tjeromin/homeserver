@@ -29,6 +29,7 @@ printf "\n--- copy config folders ---\n"
 rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/grafana.ini ../grafana/grafana.ini
 rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/custom.ini ../grafana/custom.ini
 rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/plugins ../grafana/var/plugins
+rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/grafana.db ../grafana/var/grafana.db
 
 printf "\n\nfinished! Start docker-compose and run restore_mariadb.sh to restore the nextcloud database if you want to replace it\n"
 

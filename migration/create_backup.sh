@@ -37,12 +37,12 @@ rsync -Aavx --info=progress2 --info=name0 /opt/iobroker "$dest"
 
 printf "\n\n--- GRAFANA ---\n"
 
-mkdir "$dest"grafana
-mkdir "$dest"grafana/plugins
+mkdir -p "$dest"grafana/plugins
 
 printf "\n--- copy config folders ---\n"
 rsync -Aavx --info=progress2 --info=name0 /etc/grafana/grafana.ini "$dest"grafana/
 rsync -Aavx --info=progress2 --info=name0 /etc/grafana/custom.ini "$dest"grafana/
 rsync -Aavx --info=progress2 --info=name0 /var/lib/grafana/plugins "$dest"grafana/
+rsync -Aavx --info=progress2 --info=name0 /var/lib/grafana/grafana.db "$dest"grafana/
 
 printf "\nfinished. Saved backup in %s\n" "$dest"
