@@ -2,17 +2,18 @@
 
 services:
   mariadb:
-    image: mariadb:lts
+    image: mariadb:10.3.39
     container_name: mariadb
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - ./maridadb:/var/lib/mysql
+      - /mnt/drive1/mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=pararas
-      - MYSQL_PASSWORD=pararas
+      - MYSQL_ROOT_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
+      - MYSQL_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
       - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
+      - MYSQL_USER=oc_ncadmin
+      - MARIADB_AUTO_UPGRADE=1
 
   nextcloud-php:
     image: nextcloud:stable-fpm
@@ -26,9 +27,9 @@ services:
       - NEXTCLOUD_ADMIN_USER=ncadmin
       - NEXTCLOUD_ADMIN_PASSWORD=pmabSG3YUTYqCGaFBA6B
       - NEXTCLOUD_TRUSTED_DOMAINS=192.168.178.55 tinocloud.de
-      - MYSQL_PASSWORD=pararas
+      - MYSQL_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
       - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
+      - MYSQL_USER=oc_ncadmin
       - MYSQL_HOST=mariadb
       - REDIS_HOST=redis
       - PHP_MEMORY_LIMIT=1024M
@@ -97,7 +98,7 @@ services:
     ports:
       - 8086:8086
     volumes:
-      - ./influxdb/data:/var/lib/influxdb2
+      - /mnt/drive1/influxdb:/var/lib/influxdb2
       - ./influxdb/config:/etc/influxdb2
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup

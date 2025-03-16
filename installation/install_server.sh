@@ -40,6 +40,7 @@ chmod +x ../migration/restore_mariadb.sh
 
 echo "################"
 
+echo "finished"
 echo "Expecting docker and docker-compose to be installed"
 echo "check paths in crontab for root"
-echo "finished"
+echo "copy entries in fstab file to /etc/fstab"
