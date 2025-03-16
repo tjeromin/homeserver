@@ -90,7 +90,7 @@ services:
     hostname: iobroker
     restart: always
     ports:
-      - "8081:8081"
+      - 8081:8081
     volumes:
       - ./iobroker:/opt/iobroker
 
@@ -121,5 +121,7 @@ services:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - GF_LOG_LEVEL=warn
+    links:
+      - influxdb
     depends_on:
       - influxdb
