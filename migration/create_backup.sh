@@ -14,10 +14,10 @@ printf "\n\n --- copy themes folder ---\n"
 rsync -Aavx --info=progress2 --info=name0 /var/www/html/themes "$dest"
 
 printf "\n\n --- backup database ---\n"
-printf "\n backup mariadb db for nextcloud?"
+printf "\n backup mariadb db for nextcloud? (yes/no) "
 read -r answer
 
-if [ "$answer" != "yes" ]; then
+if [ "$answer" == "yes" ]; then
     if mysqldump --single-transaction -h localhost -u root -p nextcloud >"$dest"nextcloud-sqlbkp.sql; then
         printf "\nsuccess\n"
     else

@@ -2,7 +2,8 @@
 
 # $1 path to backup folder
 
-printf 'This script will delete and write the config, themes and data folder in /var/www/html/ (y/n)? '
+printf 'This script will delete and write the config, themes and data folder in /var/www/html/ 
+ and ./iobroker and ./grafana (y/n)? '
 read -r answer
 
 if [ "$answer" != "yes" ]; then
@@ -12,22 +13,22 @@ fi
 printf "\n--- NEXTCLOUD ---\n"
 
 printf "\n--- restore config folder ---\n"
-rsync -Aavx --info=progress2 --info=name0 "$1"/config /var/www/html/config
+rsync -Aavx --info=progress2 --info=name0 "$1"/config ../nextcloud
 
 printf "\n\n --- restore themes folder ---\n"
-rsync -Aavx --info=progress2 --info=name0 "$1"/themes /var/www/html/themes
+rsync -Aavx --info=progress2 --info=name0 "$1"/themes ../nextcloud
 
 printf "\n--- IOBROKER ---\n"
 
 printf "\n--- restore config folder ---\n"
-rsync -Aavx --info=progress2 --info=name0 "$1"/iobroker /opt/iobroker
+rsync -Aavx --info=progress2 --info=name0 "$1"/iobroker ../iobroker
 
 printf "\n\n--- GRAFANA ---\n"
 
 printf "\n--- copy config folders ---\n"
-rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/grafana.ini /etc/grafana/grafana.ini
-rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/custom.ini /etc/grafana/custom.ini
-rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/plugins /var/lib/grafana/plugins
+rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/grafana.ini ../grafana/grafana.ini
+rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/custom.ini ../grafana/custom.ini
+rsync -Aavx --info=progress2 --info=name0 "$1"/grafana/plugins ../grafana/var/plugins
 
 printf "\n\nfinished! Start docker-compose and run restore_mariadb.sh to restore the nextcloud database\n"
 

@@ -114,6 +114,9 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ./grafana/var:/var/lib/grafana
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_LOG_LEVEL=warn
     depends_on:
       - influxdb
