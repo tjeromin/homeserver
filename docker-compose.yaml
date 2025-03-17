@@ -85,7 +85,7 @@ services:
     command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d grafana.tinocloud.de --agree-tos --non-interactive
 
   iobroker:
-    image: buanet/iobroker:latest-v9
+    image: buanet/iobroker:latest-v7
     container_name: iobroker
     hostname: iobroker
     restart: always

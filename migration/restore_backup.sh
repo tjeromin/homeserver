@@ -21,7 +21,7 @@ rsync -Aavx --info=progress2 --info=name0 "$1"/themes ../nextcloud
 printf "\n--- IOBROKER ---\n"
 
 printf "\n--- restore config folder ---\n"
-rsync -Aavx --info=progress2 --info=name0 "$1"/iobroker ../iobroker
+rsync -Aavx --info=progress2 --info=name0 "$1"/iobroker ../
 
 printf "\n\n--- GRAFANA ---\n"
 
