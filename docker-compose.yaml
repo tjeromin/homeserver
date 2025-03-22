@@ -91,6 +91,8 @@ services:
     restart: always
     ports:
       - 8081:8081
+      - 502:502
+      - 1883:1883
     volumes:
       - ./iobroker:/opt/iobroker
 
