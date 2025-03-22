@@ -1,5 +1,3 @@
-# crontab file for root user
-
 # Edit this file to introduce tasks to be run by cron.
 #
 # Each task to run has to be defined through a single line
@@ -23,9 +21,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-0 1 * * * sudo rsync -a --delete /mnt/drive1/ /mnt/drive2
-0 3 * * 0 python3 /home/pavillon/homeserver/disk_scripts/check_disk.py
-0 3 * * 6 sudo smartctl -t short /dev/sdb
-0 4 0 * * sudo smartctl -t long /dev/sdb
-1 4 0 * * python3 /home/pavillon/homeserver/disk_scripts/keep_disk_busy.py
-0 * * * * sudo /home/pavillon/homeserver/disk_scripts/measure_influxdb_size.sh
+*/5  *  *  *  * docker exec -u www-data nextcloud-php php /var/www/html/cron.php
