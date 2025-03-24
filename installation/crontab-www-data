@@ -21,4 +21,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-*/5  *  *  *  * docker exec -u www-data nextcloud-php php /var/www/html/cron.php
+*/5 * * * * docker exec -u www-data nextcloud php /var/www/html/cron.php
