@@ -1,0 +1,9 @@
+certbot/conf/**
+grafana/var/plugins/**
+iobroker/**
+grafana/var/grafana.db
+
+nextcloud/**
+!nextcloud/old_config.php
+!nextcloud/config/config.php
+
