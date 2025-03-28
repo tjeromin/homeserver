@@ -55,30 +55,10 @@ services:
       - ./nginx/data:/usr/share/nginx/html:ro
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+      - ./certbot/grafana/www:/var/www/certbot/grafana
     links:
       - nextcloud
       - grafana
-
-  apache:
-    image: httpd:2.4-alpine
-    container_name: apache
-    restart: always
-    ports:
-      - 8080:80
-      - 9090:90
-    links:
-      - nextcloud
-      - grafana
-    volumes:
-      - ./apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-      - ./nextcloud:/var/www/html
-    volumes_from:
-      - nextcloud
-    depends_on:
-      - nextcloud
 
   certbot-tinocloud:
     image: certbot/certbot
@@ -87,15 +67,15 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d tinocloud.de --agree-tos --non-interactive
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email davidjer@hotmail.de -d grafana.tinocloud.de,tinocloud.de --agree-tos --non-interactive
 
   certbot-grafana:
     image: certbot/certbot
     container_name: certbot-grafana
-    restart: always
+    restart: no
     volumes:
       - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./certbot/grafana/www:/var/www/certbot
     command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d grafana.tinocloud.de --agree-tos --non-interactive
 
   iobroker:
