@@ -14,7 +14,7 @@ services:
       - MARIADB_AUTO_UPGRADE=1
 
   nextcloud:
-    image: nextcloud:stable-fpm
+    image: nextcloud:30.0.8
     container_name: nextcloud
     restart: always
     links:
@@ -25,7 +25,7 @@ services:
     environment:
       - NEXTCLOUD_ADMIN_USER=ncadmin
       - NEXTCLOUD_ADMIN_PASSWORD=pmabSG3YUTYqCGaFBA6B
-      - NEXTCLOUD_TRUSTED_DOMAINS=192.168.178.55 tinocloud.de
+      - NEXTCLOUD_TRUSTED_DOMAINS=192.168.178.55 tinocloud.org
       - NEXTCLOUD_DATA_DIR=/nc_data
       - MYSQL_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
       - MYSQL_DATABASE=nextcloud
@@ -43,19 +43,20 @@ services:
     container_name: redis
     restart: always
 
-  nginx:
-    image: docker.io/library/nginx:1.26.3-alpine
-    container_name: nginx
+  caddy:
+    image: caddy:2.9.1
+    container_name: caddy
     restart: unless-stopped
     ports:
       - 80:80
       - 443:443
+      - 81:81
     volumes:
-      - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./nginx/data:/usr/share/nginx/html:ro
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/grafana/www:/var/www/certbot/grafana
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/site:/srv
+      - ./caddy/data:/data
+      - ./caddy/config:/config
+      - ./nextcloud:/var/www/html
     links:
       - nextcloud
       - grafana

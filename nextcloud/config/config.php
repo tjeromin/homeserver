@@ -6,13 +6,15 @@ $CONFIG = array (
   'trusted_domains' => 
   array (
     0 => 'ubuntu',
-    1 => 'tinocloud.de',
+    1 => 'tinocloud.org',
     2 => '192.168.178.55',
-    3 => '192.168.178.42'
+    3 => '192.168.178.42',
+    4 => 'localhost',
+    5 => 'caddy',
   ),
   'datadirectory' => '/nc_data',
   'dbtype' => 'mysql',
-  'version' => '30.0.7.2',
+  'version' => '30.0.8.1',
   'overwrite.cli.url' => 'http://ubuntu',
   'dbname' => 'nextcloud',
   'dbhost' => 'mariadb:3306',
