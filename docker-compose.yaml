@@ -39,6 +39,19 @@ services:
       - mariadb
       - redis
 
+  cron-nc:
+    image: nextcloud:30.0.8
+    container_name: cron-nc
+    restart: unless-stopped
+    volumes:
+      - ./nextcloud:/var/www/html
+      - /mnt/drive1/nc_data:/nc_data
+    entrypoint: /cron.sh
+    depends_on:
+      - mariadb
+      - redis
+      - nextcloud
+
   redis:
     image: redis:alpine
     container_name: redis
@@ -67,7 +80,6 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
     volumes:
       - ./ddclient/config:/config
 
