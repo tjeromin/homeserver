@@ -10,3 +10,7 @@ tinocloud.org {
 
     reverse_proxy nextcloud:80
 }
+
+grafana.tinocloud.org {
+    reverse_proxy grafana:3000
+}
