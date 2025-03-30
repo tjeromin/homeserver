@@ -6,7 +6,7 @@ $CONFIG = array (
   'trusted_domains' => 
   array (
     0 => 'tinocloud.org',
-    1 => '172.19.0.0/24',
+    1 => '192.168.178.55',
   ),
   'datadirectory' => '/nc_data',
   'dbtype' => 'mysql',
