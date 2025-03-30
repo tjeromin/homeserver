@@ -17,6 +17,7 @@ services:
     image: nextcloud:30.0.8
     container_name: nextcloud
     restart: always
+    # runs on port 80
     links:
       - mariadb
     volumes:
@@ -44,7 +45,7 @@ services:
     restart: always
 
   caddy:
-    image: caddy:2.9.1
+    image: ghcr.io/caddybuilds/caddy-cloudflare:latest
     container_name: caddy
     restart: unless-stopped
     ports:

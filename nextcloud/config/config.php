@@ -5,12 +5,8 @@ $CONFIG = array (
   'secret' => 'Dl03yNqtyJhUaPsHkmy76gehgv4O9yKm1yB2K6BVBkcJDeSz',
   'trusted_domains' => 
   array (
-    0 => 'ubuntu',
-    1 => 'tinocloud.org',
-    2 => '192.168.178.55',
-    3 => '192.168.178.42',
-    4 => 'localhost',
-    5 => 'caddy',
+    0 => 'tinocloud.org',
+    1 => '172.19.0.0/24',
   ),
   'datadirectory' => '/nc_data',
   'dbtype' => 'mysql',
