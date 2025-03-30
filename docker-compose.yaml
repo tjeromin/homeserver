@@ -51,6 +51,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/data:/data
@@ -59,23 +60,16 @@ services:
       - nextcloud
       - grafana
 
-  certbot-tinocloud:
-    image: certbot/certbot
-    container_name: certbot-tinocloud
-    restart: no
+  ddclient:
+    image: lscr.io/linuxserver/ddclient:latest
+    container_name: ddclient
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email davidjer@hotmail.de -d grafana.tinocloud.de,tinocloud.de --agree-tos --non-interactive
-
-  certbot-grafana:
-    image: certbot/certbot
-    container_name: certbot-grafana
-    restart: no
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/grafana/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --keep-until-expiring --email davidjer@hotmail.de -d grafana.tinocloud.de --agree-tos --non-interactive
+      - ./ddclient/config:/config
 
   iobroker:
     image: buanet/iobroker:latest-v7
