@@ -8,10 +8,15 @@ $CONFIG = array (
     0 => 'tinocloud.org',
     1 => '192.168.178.55',
   ),
+  'trusted_proxies' => 
+  array (
+    0 => '192.168.178.55',
+  ),
   'datadirectory' => '/nc_data',
   'dbtype' => 'mysql',
   'version' => '30.0.8.1',
-  'overwrite.cli.url' => 'http://ubuntu',
+  'overwrite.cli.url' => 'https://tinocloud.org',
+  'overwriteprotocol' => 'https',
   'dbname' => 'nextcloud',
   'dbhost' => 'mariadb:3306',
   'dbport' => '',

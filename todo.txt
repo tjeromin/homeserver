@@ -1,5 +1,3 @@
 permissions für nextcloud, grafana
 tasmota doku und ip setzen
-mariadb updaten, kompatibilität prüfen
-ddclient as docker
 nextcloud cron
