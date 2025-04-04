@@ -1,4 +1,4 @@
-### https / ssl
+### https
 
 The domain is hosted by cloudflare. For https to work the go to Cloudflare -> SSL -> Overview -> Configure SSL/TLS Encryption -> Set mode to Full or Full (Strict).
 
@@ -14,7 +14,3 @@ Follow steps above in cloudflare and make sure the caddyfile contains following 
 
 example.org { ... }
 ```
-
-### Passwords etc...
-
-Passwords are stored via docker secrets which are used in the docker-compose.yaml.

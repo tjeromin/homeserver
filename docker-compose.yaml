@@ -7,11 +7,11 @@ services:
     volumes:
       - /mnt/drive1/mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
-      MYSQL_PASSWORD: 0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
-      MYSQL_DATABASE: nextcloud
-      MYSQL_USER: oc_ncadmin
-      MARIADB_AUTO_UPGRADE: 1
+      - MYSQL_ROOT_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
+      - MYSQL_PASSWORD=0rPYdrJfKyDW11Zzf7XDb5JxIaUKVk
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=oc_ncadmin
+      - MARIADB_AUTO_UPGRADE=1
 
   nextcloud:
     image: nextcloud:30.0.8
@@ -38,8 +38,6 @@ services:
     depends_on:
       - mariadb
       - redis
-    secrets:
-      - mariadb_pw
 
   cron-nc:
     image: nextcloud:30.0.8
@@ -129,20 +127,3 @@ services:
       - influxdb
     depends_on:
       - influxdb
-
-  test:
-    image: mariadb:10.4
-    container_name: test
-    restart: unless-stopped
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mariadb_pw
-      MYSQL_PASSWORD_FILE: /run/secrets/mariadb_pw
-      MYSQL_DATABASE: test
-      MYSQL_USER: testuser
-    secrets:
-      - mariadb_pw
-
-secrets:
-  mariadb_pw:
-    file: ./secrets/mariadb_pw.txt
