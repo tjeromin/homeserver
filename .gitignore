@@ -7,3 +7,4 @@ nextcloud/**
 !nextcloud/old_config.php
 !nextcloud/config/config.php
 
+secrets.txt
