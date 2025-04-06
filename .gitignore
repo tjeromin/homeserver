@@ -2,8 +2,8 @@ certbot/conf/**
 grafana/var/plugins/**
 iobroker/**
 grafana/var/grafana.db
+env_files/**
 
 nextcloud/**
 !nextcloud/old_config.php
 !nextcloud/config/config.php
-
