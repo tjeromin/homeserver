@@ -1,7 +1,7 @@
 
 {
     # Set the ACME DNS challenge provider to use Cloudflare for all sites
-    acme_dns cloudflare I993q2bLnnC9awrWnroTgypufCWtWzdhMWMxqH6x
+    acme_dns cloudflare {$CLOUDFLARE_DNS_TOKEN}
 }
 
 :8080 {
@@ -11,7 +11,7 @@
     reverse_proxy nextcloud:80
 }
 
-tinocloud.org {
+{$ROOT_DOMAIN} {
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     }
@@ -21,6 +21,6 @@ tinocloud.org {
     reverse_proxy nextcloud:80
 }
 
-grafana.tinocloud.org {
+{$GRAFANA_DOMAIN} {
     reverse_proxy grafana:3000
 }
