@@ -62,7 +62,6 @@ services:
       - ./caddy/data:/data
       - ./caddy/config:/config
     env_file:
-      - ./env_files/caddy.env
       - ./env_files/global.env
     links:
       - nextcloud
@@ -75,6 +74,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    env_file:
+      - ./env_files/global.env
     volumes:
       - ./ddclient/config:/config
 
