@@ -7,7 +7,7 @@ ORG="tino"
 BUCKET="system_stats"
 MEASUREMENT="influxdb_size"
 TYPE="total"
-INFLUX_API_TOKEN="i0pKgBRFqwCsrE_1mKqW2QhOhOfzN9OFIqyLmUWVlNHis3SW0u2nIDW4pHIooyCQ5zleBGh9nUsKAEeNN3VrFQ=="
+INFLUX_API_TOKEN="$INFLUXDB_API_TOKEN"
 
 # Folder to be monitored
 FOLDER_PATH="/mnt/drive1/influxdb/"
