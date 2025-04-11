@@ -3,7 +3,7 @@ grafana/var/plugins/**
 iobroker/**
 grafana/var/grafana.db
 env_files/**
+backup/**
 
 nextcloud/**
 !nextcloud/old_config.php
-!nextcloud/config/config.php
