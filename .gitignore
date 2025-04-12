@@ -7,3 +7,5 @@ backup/**
 
 nextcloud/**
 !nextcloud/old_config.php
+
+backup_log.txt

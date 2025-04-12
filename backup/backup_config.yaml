@@ -1,3 +1,6 @@
-backup_root: "~/backups"
+backup_root: "/mnt/drive1/backups/"
 folders:
-  - ./testdir
+  - ../grafana
+  - ../influxdb
+  - ../iobroker
+  - ../nextcloud

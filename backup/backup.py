@@ -2,11 +2,14 @@ import os
 import subprocess
 import yaml
 import logging
+import shutil
 from datetime import datetime
 
 class BackupManager:
     def __init__(self, config_file='backup_config.yaml'):
-        self.config_file = config_file
+        # Determine the directory where the script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.config_file = os.path.join(script_dir, config_file)
         self.setup_logging()
         
     def setup_logging(self):
@@ -33,9 +36,20 @@ class BackupManager:
             with open(self.config_file, 'r') as f:
                 config = yaml.safe_load(f)
             
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Resolve folder paths relative to the script's directory
             folders = config.get('folders', [])
+            folders = [
+                os.path.join(script_dir, folder) if not os.path.isabs(folder) else folder
+                for folder in folders
+            ]
+
+            # Resolve backup_root path relative to the script's directory
             backup_root = config.get('backup_root', './backups')
-            
+            if not os.path.isabs(backup_root):
+                backup_root = os.path.join(script_dir, backup_root)
+
             self.logger.info(f"Found {len(folders)} folders to backup")
             self.logger.info(f"Using backup root directory: {backup_root}")
             
@@ -94,7 +108,18 @@ class BackupManager:
             
             for folder in folders:
                 self.backup_folder(folder, backup_path)
-                
+            
+            # Compress the backup directory
+            archive_name = f"{backup_path}.tar.gz"
+            self.logger.info(f"Compressing backup directory to '{archive_name}'")
+            shutil.make_archive(backup_path, 'gztar', root_dir=backup_path)
+            self.logger.info(f"Backup directory compressed successfully: {archive_name}")
+            
+            # Delete the uncompressed backup folder
+            self.logger.info(f"Deleting uncompressed backup folder: '{backup_path}'")
+            shutil.rmtree(backup_path)
+            self.logger.info(f"Uncompressed backup folder deleted successfully")
+            
             self.logger.info("Backup process completed successfully")
             
         except Exception as e:
