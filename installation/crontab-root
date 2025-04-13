@@ -29,4 +29,4 @@
 0 4 0 * * sudo smartctl -t long /dev/sdb
 1 4 0 * * python3 /home/pavillon/homeserver/disk_scripts/keep_disk_busy.py
 0 * * * * sudo /home/pavillon/homeserver/disk_scripts/measure_influxdb_size.sh
-*/5 * * * * docker exec -u www-data nextcloud php /var/www/html/cron.php
+0 4 * * * sudo python3 /home/pavillon/homeserver/backup/backup.py
