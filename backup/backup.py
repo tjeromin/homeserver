@@ -99,6 +99,32 @@ class BackupManager:
         except Exception as e:
             self.logger.error(f"Error backing up '{source_path}': {str(e)}")
         
+    def delete_oldest_backups(self, backup_root, backup_prefix="backup_"):
+        """Delete the oldest backup files if there are more than 3 backups"""
+        try:
+            self.logger.info(f"Checking for old backups in '{backup_root}'")
+
+            # List all files in the backup_root directory that start with the backup prefix
+            backups = [
+                os.path.join(backup_root, f) for f in os.listdir(backup_root)
+                if f.startswith(backup_prefix)
+            ]
+
+            # Sort backups by creation time (oldest first)
+            backups.sort(key=lambda f: os.path.getctime(f))
+
+            # If there are more than 3 backups, delete the oldest ones
+            while len(backups) > 3:
+                oldest_backup = backups.pop(0)
+                if os.path.isdir(oldest_backup):
+                    shutil.rmtree(oldest_backup)
+                else:
+                    os.remove(oldest_backup)
+                self.logger.info(f"Deleted old backup: {oldest_backup}")
+
+        except Exception as e:
+            self.logger.error(f"Failed to delete old backups: {str(e)}")
+        
     def run_backup(self):
         """Run the complete backup process"""
         try:
@@ -119,6 +145,9 @@ class BackupManager:
             self.logger.info(f"Deleting uncompressed backup folder: '{backup_path}'")
             shutil.rmtree(backup_path)
             self.logger.info(f"Uncompressed backup folder deleted successfully")
+            
+            # Delete oldest backups if necessary
+            self.delete_oldest_backups(backup_root)
             
             self.logger.info("Backup process completed successfully")
             
