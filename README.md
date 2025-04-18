@@ -49,3 +49,26 @@ Follow steps above in cloudflare and make sure the caddyfile contains following 
 
 example.org { ... }
 ```
+
+### influxdb
+
+#### manipulate data
+```
+// Daten ändern in bestimmten Zeitraum
+
+import "date"
+
+option startTime = date.time(t: 2024-09-30T03:00:00Z)
+option stopTime = date.time(t: 2024-10-05T12:00:00Z)
+
+from(bucket: "smarthome")
+  |> range(start: startTime, stop: stopTime)
+  |> filter(fn: (r) => r["_measurement"] == "power")
+  |> filter(fn: (r) => r["_field"] == "power")
+  |> map(fn: (r) => ({ r with _value: 300 }))
+  |> to(bucket: "test")
+  
+// Daten löschen in bestimmten Zeitraum
+
+influx delete --org tino --bucket smarthome-history   --start '2024-10-05T13:00:00Z'   --stop '2024-10-06T20:00:00Z' --predicate '_measurement="power" AND device="smartmeter" AND _value=0' --token <api_token>
+```
