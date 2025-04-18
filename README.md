@@ -1,3 +1,12 @@
+# Homeserver
+
+Runs nextcloud, iobroker, influxdb and grafana in docker containers.
+
+## Power Monitoring
+The server monitors the power as shown below:
+
+![SVG Image](images/PowerMonitoring.svg)
+
 ### tasmota (reads powermeter)
 The powermeter is read via infra red by a microcontroller and sent to the network via mqtt and used by iobroker. 
 The mqtt protocol has to be configured correctly.
@@ -15,6 +24,14 @@ This script has to be configured to read the powermeter:
 1,7707010060320101@#,SID,,meter_id,0
 #
 ```
+
+## Installation and configuration
+
+### cronjobs
+cronjobs must run contained in installation folder.
+
+### fstab
+fstab entries must be added to the fstab file on the host to mount the drives correctly.
 
 ### https
 
