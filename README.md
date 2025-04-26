@@ -33,6 +33,12 @@ This script has to be configured to read the powermeter:
 
 To update nextcloud just change the tag in docker-compose.yaml to the next major version. Don't skip a major verison.
 
+### MariaDB
+
+#### Update
+
+To update mariadb just change the tag in docker-compose.yaml to any higher version. MARIADB_AUTO_UPGRADE=1 has to be set. Don't remove the container.
+
 ### cronjobs
 cronjobs must run contained in installation folder.
 
