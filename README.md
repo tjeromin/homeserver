@@ -27,6 +27,12 @@ This script has to be configured to read the powermeter:
 
 ## Installation and configuration
 
+### Nextcloud
+
+#### Update
+
+To update nextcloud just change the tag in docker-compose.yaml to the next major version. Don't skip a major verison.
+
 ### cronjobs
 cronjobs must run contained in installation folder.
 
