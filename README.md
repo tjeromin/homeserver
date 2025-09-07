@@ -64,6 +64,10 @@ example.org { ... }
 
 ### influxdb
 
+#### setup
+
+The API-TOKEN needs to be added to the environment variables under `/etc/environment`.
+
 #### manipulate data
 ```
 // Daten ändern in bestimmten Zeitraum
