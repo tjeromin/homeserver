@@ -27,6 +27,12 @@ This script has to be configured to read the powermeter:
 
 ## Installation and configuration
 
+### Hostname / ip address
+The ip address has to be set in following places:
+* nextcloud environment and config.php
+* tasmota mqtt config
+* shelly mqtt config
+
 ### Nextcloud
 
 #### Update
