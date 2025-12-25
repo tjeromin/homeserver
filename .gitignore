@@ -3,6 +3,7 @@ grafana/var/plugins/**
 iobroker/**
 grafana/var/grafana.db
 env_files/**
+etc-pihole/**
 
 nextcloud/**
 !nextcloud/old_config.php
