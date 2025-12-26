@@ -29,9 +29,13 @@ This script has to be configured to read the powermeter:
 
 ### Hostname / ip address
 The ip address has to be set in following places:
-* nextcloud environment and config.php
+* pihole web interface (port 85) -> setting -> local dns -> new entry (homeserver:192.168.178.???)
 * tasmota mqtt config
 * shelly mqtt config
+
+### Pihole
+
+Only the local ip address (see above).
 
 ### Nextcloud
 
