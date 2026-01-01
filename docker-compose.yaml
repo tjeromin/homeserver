@@ -57,10 +57,12 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+      - 5555:5555 # pdfEditor
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/data:/data
       - ./caddy/config:/config
+      - ./pdf_editor:/pdf_editor
     env_file:
       - ./env_files/global.env
     links:

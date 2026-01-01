@@ -4,6 +4,8 @@ iobroker/**
 grafana/var/grafana.db
 env_files/**
 etc-pihole/**
+jenkins/**
+pdf_editor/**
 
 nextcloud/**
 !nextcloud/old_config.php
