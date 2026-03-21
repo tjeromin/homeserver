@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: mariadb:11.3
+    image: mariadb:11.8
     container_name: mariadb
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
@@ -8,9 +8,11 @@ services:
       - /mnt/drive1/mysql:/var/lib/mysql
     env_file:
       - ./env_files/mariadb.env
+#    environment:
+#      - MARIADB_AUTO_UPGRADE=1
 
   nextcloud:
-    image: nextcloud:31
+    image: nextcloud:33
     container_name: nextcloud
     restart: always
     # runs on port 80
