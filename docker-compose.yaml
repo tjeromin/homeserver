@@ -34,7 +34,7 @@ services:
       - redis
 
   cron-nc:
-    image: nextcloud:30.0.8
+    image: nextcloud:33
     container_name: cron-nc
     restart: unless-stopped
     volumes:
@@ -113,7 +113,7 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=smarthome
 
   grafana:
-    image: grafana/grafana:11.5.2
+    image: grafana/grafana:12.3
     container_name: grafana
     restart: always
     ports:
