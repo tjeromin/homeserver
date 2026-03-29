@@ -1,3 +1,2 @@
-UUID=edc12100-f060-48cc-8202-ee104ad4d558       /mnt/drive1         ext4    defaults        0       2
-UUID=dd4c0d24-5faa-4beb-bb77-f3417826d37c       /mnt/drive2         ext4    defaults        0       2
-
+UUID=dd4c0d24-5faa-4beb-bb77-f3417826d37c       /mnt/drive1         ext4    defaults        0       2
+UUID=fb35c15b-a9ba-400b-bade-d3318b999217       /mnt/drive2         ext4    defaults        0       2
