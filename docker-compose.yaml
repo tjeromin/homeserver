@@ -78,10 +78,13 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - CURL_OPTIONS=-4
     env_file:
       - ./env_files/global.env
     volumes:
       - ./ddclient/config:/config
+    dns:
+      - 1.1.1.1
 
   iobroker:
     image: buanet/iobroker:latest-v7
