@@ -1,3 +1,12 @@
+"""
+Homeserver backup script.
+
+Creates timestamped backups of folders listed in backup_config.yaml (resolved
+relative to the script). Uses rsync to copy folders while preserving metadata,
+compresses each timestamped backup to a .tar.gz archive, keeps only the latest
+three backups and deletes older ones, and logs operations to backup_log.txt.
+"""
+
 import os
 import subprocess
 import yaml

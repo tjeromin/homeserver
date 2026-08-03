@@ -3,6 +3,7 @@ import subprocess
 
 output1 = subprocess.run(['df', '-h', '/mnt/drive1'], stdout=subprocess.PIPE, text=True)
 output2 = subprocess.run(['df', '-h', '/mnt/drive2'], stdout=subprocess.PIPE, text=True)
+outputMainDisk = subprocess.run(['df', '-h', '/'], stdout=subprocess.PIPE, text=True)
 output_rsync = subprocess.run(['sudo', 'rsync', '-avn', '--delete', '/mnt/drive1/', '/mnt/drive2'], stdout=subprocess.PIPE, text=True)
 output_smartctl = subprocess.run(['sudo', 'smartctl', '-a', '/dev/sdb'], stdout=subprocess.PIPE, text=True)
 
@@ -13,6 +14,9 @@ sender_email = "tinocloud.cloudns@gmail.com"  # Enter your address
 receiver_email = "davidjer@hotmail.de"  # Enter receiver address
 message = """\
 Subject: tinocloud
+
+OS Disk:
+""" + outputMainDisk.stdout + """
 
 Disk 1:
 """ + output1.stdout + """
